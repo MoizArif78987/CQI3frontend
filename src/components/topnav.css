@@ -1,0 +1,71 @@
+.navbar{
+    height:7%;
+    width: 100%;
+    box-shadow: 0px -2px 10px 5px rgba(0, 0, 0, 0.251);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar .logo{
+    height: 100%;
+    width: 5%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    align-self: flex-start;
+}
+.navbar .logo .topnavLink{
+    height: 80%;
+    width: 100%;
+}
+.navbar .logo .topnavLink img{
+    height: 100%;
+    width: auto;
+}
+.navbar .NavProfilesction{
+    height: 100%;
+    width: 20%;
+    align-items: center;
+    display: flex;
+    align-self: flex-end;
+}
+.navbar .NavProfilesction .profileLink{
+    height: 100%;
+    width: 80%;
+    align-items: center;
+    display: flex;
+    align-self: flex-end;
+    text-decoration: none;
+    color: #053872;
+}
+.navbar .NavProfilesction .profile{
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    align-self: flex-end;
+}
+.navbar .NavProfilesction .profile img{
+    height: 80%;
+    width: auto;
+}
+
+.navbar .NavProfilesction .logout{
+    height: 100%;
+    width: 20%;
+    align-items: center;
+    display: flex;
+    align-self: flex-end;
+    cursor: pointer;
+}
+.navbar .NavProfilesction .logout .logoutLink{
+    height: 80%;
+    width: 100%;
+}
+
+.navbar .NavProfilesction .logout img{
+    height: 80%;
+    width: auto;
+    align-self: center;
+}
+

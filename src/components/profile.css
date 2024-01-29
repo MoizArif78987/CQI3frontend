@@ -1,0 +1,85 @@
+.profilePage {
+    height: 100vh;
+    width: 100vw;
+}
+
+.profilePage .ContainerWithSideNav {
+    height: 93%;
+    width: 100%;
+    display: flex;
+}
+
+.profilePage .ContainerWithSideNav .profilePageContainer {
+    height: 100%;
+    width: 85%;
+}
+
+.profilePage .ContainerWithSideNav .profilePageContainer .profilecard {
+    height: 80%;
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 5%;
+    box-shadow: 0.5px 0.5px 10px 0.5px grey;
+}
+
+.profilePage .ContainerWithSideNav .profilePageContainer .profilecard .imageDiv{
+    height: 30%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profilePage .ContainerWithSideNav .profilePageContainer .profilecard .imageDiv .imageContainer{
+    height: 100%;
+    width: 24%;
+}
+.profilePage .ContainerWithSideNav .profilePageContainer .profilecard .imageDiv .imageContainer img{
+    border-radius: 50%;
+    height: 90%;
+    width: 90%;
+}
+.profilePage .ContainerWithSideNav .profilePageContainer .profilecard form{
+    height: 70%;
+    width: 100%;
+}
+.profilePage .ContainerWithSideNav .profilePageContainer .profilecard form .labelDiv {
+    padding-top: 20px;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+}
+
+.profilePage .ContainerWithSideNav .profilePageContainer .profilecard form .labelDiv label {
+    height: 100%;
+    width: 20%;
+    text-align: center;
+    align-self: center;
+}
+
+.profilePage .ContainerWithSideNav .profilePageContainer .profilecard form .labelDiv input {
+    padding-left: 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    height: 70%;
+    width: 70%;
+}
+.profilePage .ContainerWithSideNav .profilePageContainer .profilecard form button{
+    height: 40px;
+    width: 20%;
+    margin-left: 40%;
+    margin-top: 15px;
+    color: white;
+    background-color: rgb(2, 182, 2);
+    border: 1px solid rgb(2, 182, 2);
+    border-radius: 5px;
+}
+@media only screen and (max-width:600px) {
+    .profilePage .ContainerWithSideNav .profilePageContainer .profilecard {
+        height: 60%;
+        width: 95%;
+        margin-left: 5%;
+        margin-top: 20%;
+        box-shadow: 0.5px 0.5px 10px 0.5px grey;
+    }
+}

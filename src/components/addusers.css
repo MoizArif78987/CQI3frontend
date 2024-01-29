@@ -1,0 +1,209 @@
+.addadminPage {
+  height: 100vh;
+  width: 100vw;
+}
+.addadminPage .ContainerWithSideNav {
+  height: 93%;
+  width: 100%;
+  display: flex;
+}
+.addadminPage .ContainerWithSideNav .addAdminPageContainer {
+  height: 100%;
+  width: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.addadminPage .ContainerWithSideNav .addAdminPageContainer .manualcard {
+  height: 80%;
+  width: 45%;
+  box-shadow: 0.5px 0.5px 10px 0.5px grey;
+}
+.addadminPage .ContainerWithSideNav .addAdminPageContainer .manualcard form {
+  height: 40%;
+  width: 100%;
+  display: block;
+  margin-top: 10%;
+}
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .manualcard
+  form
+  input {
+  height: 40px;
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 30px;
+  padding-left: 7px;
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .manualcard
+  form
+  .add-btn {
+  height: 40px;
+  width: 30%;
+  margin-top: 20px;
+  margin-left: 35%;
+  color: white;
+  background-color: #053872;
+  border: 1px solid #053872;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .manualcard
+  .csv-btn {
+  height: 40px;
+  width: 30%;
+  margin-top: 20px;
+  margin-left: 35%;
+  color: white;
+  background-color: rgb(2, 182, 2);
+  border: 1px solid rgb(2, 182, 2);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .manualcard
+  .dropdowns {
+  height: auto;
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .manualcard
+  .dropdowns
+  select {
+  height: 30px;
+  width: 40%;
+  font-size: 15px;
+  margin-right: 5px;
+}
+
+.addadminPage .ContainerWithSideNav .addAdminPageContainer .autoDataCard {
+  height: 80%;
+  width: 45%;
+  box-shadow: 0.5px 0.5px 10px 0.5px grey;
+  overflow-y: scroll;
+}
+
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .autoDataCard
+  .customTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .autoDataCard
+  .customTable
+  td {
+  border: 1px solid grey;
+  padding: 8px;
+  text-align: left;
+}
+
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .autoDataCard
+  .evenRow {
+  background-color: white;
+  color: black;
+}
+
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .autoDataCard
+  .customTable
+  th,
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .autoDataCard
+  .oddRow {
+  background-color: rgb(230, 230, 230);
+  color: black;
+}
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .autoDataCard
+  .customTable
+  tr {
+  height: 20px;
+}
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .autoDataCard
+  .customTable
+  tr
+  .del-btn {
+  height: 20px;
+  width: 30px;
+  background-color: red;
+  border-color: red;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .autoDataCard
+  .customTable
+  tr
+  .del-btn
+  img {
+  height: 100%;
+  width: 100%;
+}
+
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .autoDataCard
+  .ConfirmBtn {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .autoDataCard
+  .ConfirmBtn
+  button {
+  height: 70%;
+  width: 20%;
+  color: white;
+  background-color: rgb(2, 182, 2);
+  border: 1px solid rgb(2, 182, 2);
+  border-radius: 5px;
+}

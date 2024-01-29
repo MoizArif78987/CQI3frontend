@@ -1,0 +1,141 @@
+.FormPage {
+    height: 100vh;
+    width: 100vw;
+}
+.FormPage .loader{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.FormPage .header {
+    height: 10%;
+    width: 100%;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.FormPage .header h1 {
+    text-align: center;
+    margin: 0%;
+}
+
+.FormPage .FormContainer {
+    height: 80%;
+    width: 80%;
+    border: 2px solid white;
+    background-color: rgba(255, 255, 255, 0.715);
+    box-shadow: -5px 5px 10px 5px rgba(0, 0, 0, 0.6);
+    border-radius: 25px;
+    margin-left: 10%;
+    overflow-y: scroll;
+}
+
+.FormPage .FormContainer .FormQuestions {
+    height: auto;
+    width: 98%;
+    display: block;
+    
+}
+
+.FormPage .FormContainer .FormQuestions .TextItems {
+    height: auto;
+    width: 90%;
+    padding: 20px;
+}
+
+.FormPage .FormContainer .FormQuestions .ProgressBars {
+    width: 90%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.FormPage .FormContainer .FormQuestions .ProgressBars .bar-bg {
+    width: 80%;
+    height: 20px;
+    background-color: #c4c4f5;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.FormPage .FormContainer .FormQuestions .ProgressBars .bar-fill {
+    height: 100%;
+    width: 100%;
+}
+.FormPage .FormContainer .FormQuestions .ProgressBars #section20 {
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+}
+.FormPage .FormContainer .FormQuestions .ProgressBars #section100 {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.FormPage .FormContainer .FormQuestions .ProgressBars .Percentage{
+    width: 10%;
+    height: auto;
+}
+.FormPage .FormContainer .FormQuestions .ProgressBars .Percentage h3{
+    margin: 0%;
+    text-align: center;
+}
+.FormPage .FormContainer .FormQuestions .TextInputContainer{
+    width: 90%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.FormPage .FormContainer .FormQuestions .TextInputContainer input{
+    height: 100%;
+    width: 80%;
+    border: 2px solid #053872;
+    border-radius: 10px;
+    padding-left: 10px;
+    font-size: 15px;
+    color: black;
+}
+
+.FormPage .FormContainer .submit-btn{
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    position: relative;
+    height: 50px;
+    width: 20%;
+    left: 40%;
+    margin-top: 2.5%;
+    border-radius: 30px;
+    border-color: #053872;
+    background-color: #053872;
+    z-index: 1;
+    overflow: hidden;
+    font-size: 30px;
+}
+.FormPage .FormContainer .submit-btn::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-color: #c4c4f5;
+    background-color: #c4c4f5;
+    color: #053872;
+    border-radius: 30px;
+    transform: translateX(-100%);
+    transition: all .3s linear;
+}
+.FormPage .FormContainer .submit-btn:hover:before{
+    transform: translateX(0%);
+    z-index: -1;
+}
+.FormPage .FormContainer .submit-btn:hover{
+    color:#053872;
+    border-color: #c4c4f5;
+}

@@ -1,0 +1,54 @@
+.adminpanelPage{
+    height: 100vh;
+    width:100vw;
+}
+.adminpanelPage .ContainerWithSideNav{
+    height: 93%;
+    width: 100%;
+    display: flex;
+}
+.adminpanelPage .ContainerWithSideNav .StatsPageContainer{
+    height: 100%;
+    width: 85%;
+}
+.adminpanelPage .ContainerWithSideNav .StatsPageContainer .surveygraphpanel{
+    margin-top: 3%;
+    height: 30%;
+    width: 90%;
+    margin-left: 5%;
+    box-shadow: 0.5px 0.5px 15px 0.5px rgb(173, 173, 173);
+    display: grid;
+    grid-template-rows: repeat(1,3fr);
+    grid-template-columns: repeat(3,1fr);
+    overflow-y: scroll;
+}
+.adminpanelPage .ContainerWithSideNav .StatsPageContainer .surveygraphpanel .graphCard{
+    height: 90%;
+    width: 90%;
+    margin-left: 2.5%;
+    margin-top: 2.5%;
+    border: 1px solid rgb(211, 211, 211);
+    display: flex;
+}
+.adminpanelPage .ContainerWithSideNav .StatsPageContainer .surveygraphpanel .graphCard .formname{
+    height: 100%;
+    width: 50%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.adminpanelPage .ContainerWithSideNav .StatsPageContainer .surveygraphpanel .graphCard .graph{
+    height: 190px;
+    width: 50%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+@media only screen and (max-width:850px){
+    .adminpanelPage .ContainerWithSideNav .StatsPageContainer .surveygraphpanel{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media only screen and (max-width:450px){
+    .adminpanelPage .ContainerWithSideNav .StatsPageContainer .surveygraphpanel{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
