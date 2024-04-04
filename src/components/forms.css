@@ -16,7 +16,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4,1fr);
-    grid-template-rows: 25vh;
+    grid-auto-rows: 25vh;
     overflow-y: scroll;
 }
 .formsPage .ContainerWithSideNav .formPageContainer .cardContainer .cardLink{
@@ -34,18 +34,20 @@
 }
 .formsPage .ContainerWithSideNav .formPageContainer .cardContainer .card .cardtitle{
     height: 50%;
-    width: 100%;
+    width: 95%;
     padding-left: 5px;
-    padding-right: 5px;
+    padding-right: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin-right: 20px;
 }
 .formsPage .ContainerWithSideNav .formPageContainer .cardContainer .card .cardtitle h4{
     text-decoration: none;
     color: #053872;
     font-size: 20px;
+
 }
 .formsPage .ContainerWithSideNav .formPageContainer .cardContainer .card .cardDescription{
     height: 50%;
@@ -54,6 +56,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+   
 }
 .formsPage .ContainerWithSideNav .formPageContainer .cardContainer .card:hover{
     margin: -3%;

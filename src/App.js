@@ -10,6 +10,10 @@ import Addteachers from './components/addteachers';
 import Profile from './components/profile';
 import Form from './components/form';
 import { AdminProvider } from './context/AdminContext';
+import Subjectform from './components/subjectform';
+import SendReminder from './components/sendreminder';
+import Result from './components/results';
+import ResultSubjectRegistration from './components/resultSubjectRegistration';
 
 // CustomRoute component to handle both cases of the form route
 const CustomRoute = ({ path, component: Component, exact }) => (
@@ -42,10 +46,19 @@ function App() {
           <Route exact path='/addusers' component={Addusers} />
           <Route exact path='/addteachers' component={Addteachers} />
           <Route exact path='/profile' component={Profile} />
+          <Route exact path='/sendreminder' component={SendReminder} />
+          <Route exact path='/results' component={Result} />
+          <Route exact path='/subjectresults' component={ResultSubjectRegistration}/>
 
           {/* Use CustomRoute for the form route */}
           <CustomRoute exact path='/form/:id' component={Form} />
-          <CustomRoute exact path='/form/:id/:userid' component={Form} />
+          <CustomRoute exact path='/form/:id/:userid/:teacherid' component={Form} />
+
+          {/* Use CustomRoute for the form route */}
+          <CustomRoute exact path='/subjectform/:id' component={Subjectform} />
+          <CustomRoute exact path='/subjectform/:id/:userid' component={Subjectform} />
+
+          <Route path='*' component={Adminpanel} />
         </Switch>
       </AdminProvider>
     </Router>

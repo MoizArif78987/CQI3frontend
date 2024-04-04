@@ -12,7 +12,7 @@ export default function Form() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const { setAdminName, setAdminEmail } = useAdminContext();
 
-  const { id, userid } = useParams();
+  const { id, userid, teacherid } = useParams();
   const form_id = id;
   const [percentages, setPercentages] = useState([]);
   const [formdata, setFormdata] = useState(null);
@@ -25,6 +25,14 @@ export default function Form() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Check if form_id is present
+        if (!form_id) {
+          console.error("Missing form_id in the URL");
+          history.push("/"); // Redirect or handle missing form_id
+          setIsAuthenticated(false);
+          return;
+        }
+
         // If userid is present, do not perform authentication check
         if (!userid) {
           const authResponse = await fetch(`${baseURL}/checkauthentication`, {
@@ -46,9 +54,10 @@ export default function Form() {
         // Fetch form data
         const formResponse = await fetch(`${baseURL}/getformdata/${form_id}`);
         const formData = await formResponse.json();
-        setFormdata(formData);
-        setIsLoading(false);
-
+        if (formResponse.ok) {
+          setFormdata(formData);
+          setIsLoading(false);
+        }
         // Set initial responses based on response type
         const initialResponses = {};
         const initialPercentages = formData.titles.map((topic) =>
@@ -68,12 +77,12 @@ export default function Form() {
       } catch (error) {
         console.error("Error fetching form data:", error);
         setFormdata(null);
-        setIsLoading(false);
+        setIsLoading(true);
       }
     };
 
     fetchData();
-  }, [form_id, userid, history, setAdminName, setAdminEmail, setIsAuthenticated]);
+  }, [form_id, userid, teacherid, history, setAdminName, setAdminEmail, setIsAuthenticated]);
 
   const updatePercentage = (topicIndex, questionIndex, value) => {
     setPercentages((prevPercentages) => {
@@ -99,50 +108,67 @@ export default function Form() {
 
   const submitForm = async () => {
     try {
+      // Check if form_id is present
+      if (!form_id) {
+        console.error("Missing form_id in the URL");
+        return;
+      }
+
       // Prepare data for the post request
       const ratingResponses = [];
       const textResponsesData = [];
-  
+
       Object.keys(responses).forEach((questionKey) => {
         const [topicIndex, questionIndex] = questionKey
           .replace("question", "")
           .split("-");
-  
-        if (formdata.titles[topicIndex]?.questions[questionIndex]?.ResponseType === "rating" && responses[questionKey] !== "") {
+
+        if (
+          formdata.titles[topicIndex]?.questions[questionIndex]?.ResponseType ===
+            "rating" &&
+          responses[questionKey] !== ""
+        ) {
           ratingResponses.push({
             form_id: form_id,
-            question_id: formdata.titles[topicIndex].questions[questionIndex].questions_id,
+            question_id: formdata.titles[topicIndex].questions[questionIndex]
+              .questions_id,
             user_id: userid || null,
-            rating_response: responses[questionKey]
+            teacher_id: teacherid || null, // Add teacher_id to the request
+            rating_response: responses[questionKey],
           });
-        } else if (formdata.titles[topicIndex]?.questions[questionIndex]?.ResponseType === "text") {
+        } else if (
+          formdata.titles[topicIndex]?.questions[questionIndex]?.ResponseType ===
+          "text"
+        ) {
           textResponsesData.push({
             form_id: form_id,
-            question_id: formdata.titles[topicIndex].questions[questionIndex].questions_id,
+            question_id: formdata.titles[topicIndex].questions[questionIndex]
+              .questions_id,
             user_id: userid || null,
-            text_response: textResponses[questionKey] || null
+            teacher_id: teacherid || null, // Add teacher_id to the request
+            text_response: textResponses[questionKey] || null,
           });
         }
       });
-  
+
       // Make the post request for rating responses
       await fetch(`${baseURL}/setratingresponse`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(ratingResponses),
       });
-  
+
       // Make the post request for text responses
       await fetch(`${baseURL}/settextresponse`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(textResponsesData),
       });
-  
+
       // Optionally, you can handle success or redirect to a success page
       console.log("Form submitted successfully!");
     } catch (error) {
@@ -150,7 +176,6 @@ export default function Form() {
       // Optionally, you can handle errors or redirect to an error page
     }
   };
-  
 
   return (
     <>

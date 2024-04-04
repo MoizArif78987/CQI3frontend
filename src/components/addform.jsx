@@ -233,9 +233,9 @@ export default function Addform() {
   const HandleSurveyFormSubmit = async (event) => {
     event.preventDefault();
     if (
-      formData.formTitle == "" ||
-      formData.titles.title == "" ||
-      formData.titles.questions == []
+      formData.formTitle === "" ||
+      formData.titles.length === 0 ||
+      formData.titles.some((title) => title.questions.length === 0)
     ) {
       window.alert("Please Enter Data First");
     } else {
@@ -246,13 +246,18 @@ export default function Addform() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            formTitle: formData.formTitle,
+            category: formData.category,
+            titles: formData.titles,
+            teacherMapping: document.querySelector('.switch input').checked ? 1 : 0,
+          }),
         });
-
+  
         if (!response.ok) {
           throw new Error("Failed to submit the data");
         }
-
+  
         const responseData = await response.json();
         console.log(responseData);
       } catch (error) {
@@ -260,6 +265,7 @@ export default function Addform() {
       }
     }
   };
+  
   return (
     <>
       <div className="addformPage">
@@ -372,6 +378,15 @@ export default function Addform() {
                         id=""
                         placeholder="Enter the title for form"
                       />
+                    </center>
+                  </div>
+
+                  <div className="TeacherMapping">
+                    <center>
+                    <label className="switch">
+                      <input type="checkbox" />
+                      <span className="slider"/>
+                    </label>
                     </center>
                   </div>
 

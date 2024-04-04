@@ -95,6 +95,29 @@
   margin-right: 5px;
 }
 
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .manualcard
+  .section {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addadminPage
+  .ContainerWithSideNav
+  .addAdminPageContainer
+  .manualcard
+  .section
+  select {
+  height: 30px;
+  width: 40%;
+  font-size: 15px;
+  margin-right: 5px;
+}
+
 .addadminPage .ContainerWithSideNav .addAdminPageContainer .autoDataCard {
   height: 80%;
   width: 45%;

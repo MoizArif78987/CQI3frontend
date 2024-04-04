@@ -1,9 +1,8 @@
-import React from "react";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useAdminContext } from '../context/AdminContext';
-import useRequireAuth from "../hooks/useRequireAuth"
+import useRequireAuth from "../hooks/useRequireAuth";
 import JsonToCsv from "react-json-to-csv";
 import Papa from "papaparse";
 import "./addadmin.css";
@@ -14,8 +13,6 @@ import delIcon from'../images/del-icon.png'
 const baseURL = process.env.REACT_APP_BASE_URL;
 
 export default function Addteachers() {
-
-
   const history = useHistory();
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const { setAdminName } = useAdminContext();
@@ -49,20 +46,33 @@ export default function Addteachers() {
     checkAuthentication();
   }, [history, isAuthenticated]);
 
-
   const fileInputRef = useRef(null);
   const [jsonData, setJsonData] = useState([]);
   const [newTeacher, setNewTeacher] = useState({ name: "", email: "" });
+  const [selectedSection, setSelectedSection] = useState("");
+  const [selectedSemester, setSelectedSemester] = useState("");
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setNewTeacher((prevTeacher) => ({ ...prevTeacher, [name]: value }));
   };
+
   const handleAddTeacher = (event) => {
     event.preventDefault();
-    if (newTeacher.name.trim() !== "" && newTeacher.email.trim() !== "") {
+    if (
+      newTeacher.name.trim() !== "" &&
+      newTeacher.email.trim() !== "" &&
+      selectedSection !== "" &&
+      selectedSemester !== ""
+    ) {
       setJsonData((prevData) => [
         ...prevData,
-        { Name: newTeacher.name, Email: newTeacher.email },
+        {
+          Name: newTeacher.name,
+          Email: newTeacher.email,
+          Section: selectedSection,
+          Semester: selectedSemester,
+        },
       ]);
       setNewTeacher({ name: "", email: "" });
     }
@@ -109,12 +119,34 @@ export default function Addteachers() {
       },
     });
   };
+
   const handleDelete = (indexToDelete) => {
     const updatedData = jsonData.filter((_, index) => index !== indexToDelete);
     setJsonData(updatedData);
   };
 
-  console.log(jsonData);
+  const handleConfirmBtnClick = async () => {
+    try {
+      const response = await fetch(`${baseURL}/addteacher`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jsonData),
+      });
+
+      if (response.ok) {
+        // Handle success, maybe show a success message or redirect
+        console.log("Teachers added successfully!");
+      } else {
+        // Handle error, maybe show an error message
+        console.error("Failed to add teachers.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <>
       <div className="addadminPage">
@@ -140,6 +172,7 @@ export default function Addteachers() {
                   onChange={handleInputChange}
                   required
                 />
+                
                 <button className="add-btn" onClick={handleAddTeacher}>
                   Add
                 </button>
@@ -154,6 +187,38 @@ export default function Addteachers() {
               <button className="csv-btn" onClick={handleButtonClick}>
                 Add Through .csv
               </button>
+              <div className="dropdowns">
+                  <label>Semester</label>
+                  <select
+                    value={selectedSemester}
+                    onChange={(e) => setSelectedSemester(e.target.value)}
+                    required
+                  >
+                    <option value="">Select Semester</option>
+                    {/* Add semester options */}
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                  </select>
+                  
+                  <label>Section</label>
+                  <select
+                    value={selectedSection}
+                    onChange={(e) => setSelectedSection(e.target.value)}
+                    required
+                  >
+                    <option value="">Select Section</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="S">S</option>
+                  </select>
+                </div>
             </div>
             <div className="autoDataCard">
               {jsonData && jsonData.length > 0 ? (
@@ -164,6 +229,8 @@ export default function Addteachers() {
                         <th>Sr#</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Section</th>
+                        <th>Semester</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -176,6 +243,8 @@ export default function Addteachers() {
                           <td>{index + 1}</td>
                           <td>{item.Name}</td>
                           <td>{item.Email}</td>
+                          <td>{item.Section}</td>
+                          <td>{item.Semester}</td>
                           <td>
                             <button className="del-btn" onClick={() => handleDelete(index)}>
                               <img src={delIcon} alt="Loading" />
@@ -187,7 +256,7 @@ export default function Addteachers() {
                   </table>
 
                   <div className="ConfirmBtn">
-                    <button>Confirm</button>
+                    <button onClick={handleConfirmBtnClick}>Confirm</button>
                   </div>
                 </div>
               ) : (

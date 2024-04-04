@@ -1,21 +1,17 @@
-import React from "react";
-import { useRef, useState } from "react";
-import { useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useAdminContext } from "../context/AdminContext";
 import useRequireAuth from "../hooks/useRequireAuth";
-import Papa from "papaparse";
 import "./addusers.css";
 import Topnav from "./topnav";
 import Sidenav from "./sidenav";
 import delIcon from "../images/del-icon.png";
 const baseURL = process.env.REACT_APP_BASE_URL;
 
-export default function Addusers() {
+export default function SendReminder() {
   const history = useHistory();
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const { setAdminName } = useAdminContext();
-  const { setAdminEmail } = useAdminContext();
+  const { setAdminName, setAdminEmail } = useAdminContext();
 
   useRequireAuth(isAuthenticated);
 
@@ -49,18 +45,15 @@ export default function Addusers() {
   const [newuser, setNewuser] = useState({ name: "", email: "" });
   const [selectedCategory, setSelectedCategory] = useState("Student");
   const [selectedSemester, setSelectedSemester] = useState(-1);
-  const [selectedSection, setSelectedSection] = useState("");
   const [userDetails, setUserDetails] = useState([]);
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
 
-    // If the selected category is "Final Year Student," set the semester to 8
     if (event.target.value === "Final Year Student") {
       setSelectedSemester(8);
     } else {
       setSelectedSemester(-1);
-      setSelectedSection('X');
     }
   };
 
@@ -73,106 +66,105 @@ export default function Addusers() {
     setNewuser((prevuser) => ({ ...prevuser, [name]: value }));
   };
 
-  const handleSectionChange = (event) => {
-    setSelectedSection(event.target.value);
-  };
-
-  const handleAdduser = (event) => {
+  const handleAdduser = async (event) => {
     event.preventDefault();
-  
-    if (
-      newuser.name.trim() !== "" &&
-      newuser.email.trim() !== "" &&
-      (selectedCategory !== "Student" && selectedCategory !== "Final Year Student") ||
-      (selectedSemester !== null && selectedSemester !== -1 && selectedSection !== null && selectedSection !== "X")
-    ) {
-      setUserDetails((prevDetails) => [
-        ...prevDetails,
-        {
-          Name: newuser.name,
-          Email: newuser.email,
-          Category: selectedCategory,
-          Semester: selectedSemester,
-          Section: selectedSection,
+    try {
+      const response = await fetch(`${baseURL}/getstudentsbyname`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      ]);
+        body: JSON.stringify({
+          name: newuser.name,
+          email: newuser.email,
+        }),
+      });
   
-      setJsonData((prevData) => [
-        ...prevData,
-        { Name: newuser.name, Email: newuser.email, Section: selectedSection },
-      ]);
+      if (response.ok) {
+        const data = await response.json();
   
-      setNewuser({ name: "", email: "" });
-    } else {
-      // Display an error message or handle the invalid input case
-      console.log("Invalid input. Please check your entries.");
-    }
-  };
+        // Check if data.users is not empty before processing
+        if (data.users && data.users.length > 0) {
+          const newdata = data.users[0];
   
-
-  const handleUploadBtnClick = () => {
-    if (
-      selectedCategory === "Student" &&
-      selectedSemester !== -1 &&
-      selectedSection.trim() !== "" 
-    ) {
-      fileInputRef.current.click();
-    } else {
-      window.alert("Select Semester and Section First");
-    }
-  };
-
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const contents = e.target.result;
-        parseCSV(contents);
-      };
-      reader.readAsText(file);
-    }
-  };
-
-  const parseCSV = (csvContent) => {
-    Papa.parse(csvContent, {
-      header: true,
-      skipEmptyLines: true,
-      complete: (parsedData) => {
-        const { data } = parsedData;
-
-        if (data && Array.isArray(data) && data.length > 0) {
-          const headers = Object.keys(data[0]);
-
-          const newData = data.map((row) => {
-            const rowData = {};
-            headers.forEach((header) => {
-              rowData[header] = row[header];
-            });
-            return rowData;
-          });
-
-          setJsonData((prevData) => [...prevData, ...newData]);
-
-          const userDetailsFromCSV = newData.map((user) => ({
-            Name: user.Name,
-            Email: user.Email,
-            Category: selectedCategory,
-            Semester: selectedSemester,
-            Section: selectedSection
-          }));
-
-          setUserDetails((prevDetails) => [
-            ...prevDetails,
-            ...userDetailsFromCSV,
-          ]);
+          // Check if the user is not already in jsonData
+          const isUserAlreadyAdded = jsonData.some(
+            (item) => item.Name === newdata.Name && item.Email === newdata.Email
+          );
+  
+          if (!isUserAlreadyAdded) {
+            setUserDetails((prevDetails) => [
+              ...prevDetails,
+              {
+                ID: newdata.ID,
+                Name: newdata.Name,
+                Email: newdata.Email,
+                Category: newdata.Category,
+                Semester: newdata.Semester,
+              },
+            ]);
+  
+            setJsonData((prevData) => [
+              ...prevData,
+              { Name: newdata.Name, Email: newdata.Email },
+            ]);
+  
+            setNewuser({ name: "", email: "" });
+          } else {
+            console.log("User already exists in jsonData");
+          }
         }
-      },
-      error: (error) => {
-        console.error("CSV Parsing Error:", error);
-      },
-    });
+      } else {
+        // Handle other response status codes if needed
+      }
+    } catch (error) {
+      console.error("Error adding or retrieving user:", error);
+    }
   };
+  
+  const handleImportFromDatabase = async () => {
+    try {
+      const response = await fetch(`${baseURL}/getstudentsbycategory`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          category: selectedCategory,
+          semester:
+            selectedCategory === "Final Year Student" ? 8 : selectedSemester,
+        }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+  
+        // Check if data.students is not empty before processing
+        if (data.students && data.students.length > 0) {
+          const newUsers = data.students.filter(
+            (student) =>
+              !jsonData.some(
+                (item) => item.Name === student.Name && item.Email === student.Email
+              )
+          );
+  
+          setUserDetails((prevDetails) => [...prevDetails, ...newUsers]);
+  
+          setJsonData((prevData) => [
+            ...prevData,
+            ...newUsers.map((user) => ({ Name: user.Name, Email: user.Email , Section: user.Section,})),
+          ]);
+  
+          setNewuser({ name: "", email: "" });
+        }
+      } else {
+        throw new Error("Failed to import students from the database");
+      }
+    } catch (error) {
+      console.error("Error importing students:", error);
+    }
+  };
+  
 
   const handleDelete = (indexToDelete) => {
     const updatedData = jsonData.filter((_, index) => index !== indexToDelete);
@@ -185,7 +177,7 @@ export default function Addusers() {
   const HandleConfirmBtnClick = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`${baseURL}/addusers`, {
+      const response = await fetch(`${baseURL}/sendreminder`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -211,10 +203,12 @@ export default function Addusers() {
 
   return (
     <>
+    {console.log(jsonData)}
+    {console.log(userDetails)}
       <div className="addadminPage">
         <Topnav />
         <div className="ContainerWithSideNav">
-          <Sidenav active="Users" />
+          <Sidenav active="Send Reminders" />
           <div className="addAdminPageContainer">
             <div className="manualcard">
               <form>
@@ -234,21 +228,10 @@ export default function Addusers() {
                   onChange={handleInputChange}
                   required
                 />
-                
                 <button className="add-btn" onClick={handleAdduser}>
                   Add
                 </button>
               </form>
-              <input
-                type="file"
-                ref={fileInputRef}
-                accept=".csv"
-                style={{ display: "none" }}
-                onChange={handleFileUpload}
-              />
-              <button className="csv-btn" onClick={handleUploadBtnClick}>
-                Add Through .csv
-              </button>
 
               <div className="dropdowns">
                 <label>Category</label>
@@ -280,25 +263,9 @@ export default function Addusers() {
                   </>
                 )}
               </div>
-              <div className="section">
-              {selectedCategory === "Student" ||
-                selectedCategory === "Final Year Student" ? (
-                  <>
-                  <label>Section</label>
-                  <select
-                    value={selectedSection}
-                    onChange={handleSectionChange}
-                    required
-                  >
-                    <option value="">Select Section</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="S">S</option>
-                  </select>
-                  </>
-                ) : null}
-              </div>
+              <button className="csv-btn" onClick={handleImportFromDatabase}>
+                Import from Database
+              </button>
             </div>
             <div className="autoDataCard">
               {jsonData && jsonData.length > 0 ? (
@@ -335,12 +302,12 @@ export default function Addusers() {
                   </table>
 
                   <div className="ConfirmBtn">
-                    <button onClick={HandleConfirmBtnClick}>Confirm</button>
+                    <button onClick={HandleConfirmBtnClick}>Send</button>
                   </div>
                 </div>
               ) : (
                 <center>
-                  <h1>Add Users </h1>
+                  <h1>Choose User to Send Reminder</h1>
                 </center>
               )}
             </div>

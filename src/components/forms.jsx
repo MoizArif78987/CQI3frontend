@@ -20,6 +20,7 @@ export default function Forms() {
   const { setAdminName } = useAdminContext();
   const { setAdminEmail } = useAdminContext();
   const [forms, setForms] = useState([]);
+  const [subjectforms, setSubjectforms] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useRequireAuth(isAuthenticated);
@@ -66,22 +67,33 @@ export default function Forms() {
       }
     }
     fetchData();
-  }, []);
-
+  }, []); // Adding forms as a dependency to ensure useEffect runs when forms state changes
+  
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await fetch(`${baseURL}/getsubjects`);
         const responseData = await response.json();
-        setForms(responseData);
-        setIsLoading(false);
         console.log(responseData);
+  
+        // Transform the responseData array
+        const transformedData = responseData.map(subject => ({
+          id: subject.id,
+          formTitle: `Subject Registration form`,
+          category: `For Semester ${subject.Semester}`,
+        }));
+          setSubjectforms(transformedData);
+  
+        setIsLoading(false);
+        console.log(transformedData);
       } catch (error) {
-        console.error("Error fetching forms:", error);
+        console.error("Error fetching subjects:", error);
       }
     }
     fetchData();
-  }, []);
+  }, []); // Adding forms as a dependency to ensure useEffect runs when forms state changes
+  
+  
 
   return (
     <>
@@ -110,6 +122,7 @@ export default function Forms() {
                 </div>
               ) : (
                 forms.map((form) => (
+                  <>
                   
                   <Link
                     className="cardLink"
@@ -126,6 +139,46 @@ export default function Forms() {
                       </div>
                     </div>
                   </Link>
+                  
+                  </>
+                ))
+              )}
+              {isLoading ? (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginLeft: "20px",
+                  }}
+                >
+                  <BeatLoader
+                    color="#053872"
+                    size={10}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                  />
+                </div>
+              ) : (
+                subjectforms.map((form) => (
+                  <>
+                  <Link
+                    className="cardLink"
+                     key={form.form_id}
+                     to={`/subjectform/${form.id}`}
+                    style={{ textDecoration: "none", color: "#053872" }}
+                  >
+                    <div className="card">
+                      <div className="cardtitle">
+                        <h4>{form.formTitle}</h4>
+                      </div>
+                      <div className="cardDescription">
+                        <h5>{form.category}</h5>
+                      </div>
+                    </div>
+                  </Link>
+                  
+                  </>
                 ))
               )}
               <Link to="/addform" className="cardLink">
@@ -135,6 +188,14 @@ export default function Forms() {
                   </div>
                 </div>
               </Link>
+
+
+
+              
+
+
+
+
             </div>
           </div>
         </div>

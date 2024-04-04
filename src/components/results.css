@@ -1,0 +1,243 @@
+.ResultPage {
+  height: 100vh;
+  width: 100vw;
+}
+.ResultPage .ContainerWithSideNav {
+  height: 93%;
+  width: 100%;
+  display: flex;
+}
+.ResultPage .ContainerWithSideNav .ResultPageContainer {
+  height: 100%;
+  width: 85%;
+}
+.ResultPage .ContainerWithSideNav .ResultPageContainer .resultInputs {
+  margin-top: 2%;
+  height: 30%;
+  width: 90%;
+  margin-left: 5%;
+  box-shadow: 0.5px 0.5px 15px 0.5px rgb(173, 173, 173);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer.centeredInputs
+  .resultInputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ResultPage .ContainerWithSideNav .ResultPageContainer .resultInputs {
+  margin-top: 2%;
+  height: 30%;
+  width: 90%;
+  margin-left: 5%;
+  box-shadow: 0.5px 0.5px 15px 0.5px rgb(173, 173, 173);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultInputs
+  .Category
+  label {
+  margin-right: 5px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultInputs
+  .Category
+  select {
+  margin-left: 2px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultInputs
+  .restOfTheInputs {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+}
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultInputs
+  .restOfTheInputs
+  .Semester {
+  margin-bottom: 10px;
+}
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultInputs
+  .restOfTheInputs
+  .Semester
+  label {
+  margin-right: 10px;
+}
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultInputs
+  .restOfTheInputs
+  .Section
+  label {
+  margin-right: 30px;
+}
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultDisplayAndDownload {
+  margin-top: 1%;
+  height: 60%;
+  width: 90%;
+  margin-left: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultDisplayAndDownload
+  .resultDisplay {
+  margin-top: 2%;
+  height: 90%;
+  width: 80%;
+  box-shadow: 0.5px 0.5px 15px 0.5px rgb(173, 173, 173);
+  overflow: scroll;
+}
+
+/* Adjustments for table styling */
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultDisplayAndDownload
+  .resultDisplay
+  table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultDisplayAndDownload
+  .resultDisplay
+  table
+  th,
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultDisplayAndDownload
+  .resultDisplay
+  table
+  td {
+  border: 1px solid #000; /* Add borders to cells */
+  padding: 8px;
+  text-align: left;
+}
+
+/* Alternate row colors */
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultDisplayAndDownload
+  .resultDisplay
+  table
+  tbody
+  tr:nth-child(even) {
+  background-color: #fff; /* Even rows have white background */
+}
+
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultDisplayAndDownload
+  .resultDisplay
+  table
+  tbody
+  tr:nth-child(odd) {
+  background-color: rgb(
+    230,
+    230,
+    230
+  ); /* Odd rows have rgb(230, 230, 230) background */
+}
+
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultDisplayAndDownload
+  .downloadButton {
+  margin-top: 2%;
+  height: 90%;
+  width: 20%;
+  margin-left: 5%;
+  box-shadow: 0.5px 0.5px 15px 0.5px rgb(173, 173, 173);
+}
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultDisplayAndDownload
+  .downloadButton
+  .retreiveBtn {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultDisplayAndDownload
+  .downloadButton
+  .retreiveBtn
+  button {
+  height: 40px;
+  width: 65%;
+  border: 0px transparent;
+  background-color: #053872;
+  color: white;
+  border-radius: 5px;
+}
+
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultDisplayAndDownload
+  .downloadButton
+  .dnldBtn {
+  height: 30%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ResultPage
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultDisplayAndDownload
+  .downloadButton
+  .dnldBtn
+  button {
+  height: 40px;
+  width: 65%;
+  border: 0px transparent;
+  background-color: rgb(2, 182, 2);;
+  color: white;
+  border-radius: 5px;
+}
