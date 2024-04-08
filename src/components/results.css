@@ -21,6 +21,10 @@
   justify-content: space-around;
   align-items: center;
 }
+.ResultPage .ContainerWithSideNav .ResultPageContainer .resultInputs label{
+  margin-left: 10px;
+  margin-right: 2px;
+}
 .ResultPage
   .ContainerWithSideNav
   .ResultPageContainer.centeredInputs

@@ -1,7 +1,5 @@
-import React from "react";
-import { useRef, useState } from "react";
-import { useEffect } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import React, { useState, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import { useAdminContext } from "../context/AdminContext";
 import useRequireAuth from "../hooks/useRequireAuth";
 import Papa from "papaparse";
@@ -51,6 +49,11 @@ export default function Addusers() {
   const [selectedSemester, setSelectedSemester] = useState(-1);
   const [selectedSection, setSelectedSection] = useState("");
   const [userDetails, setUserDetails] = useState([]);
+  const [currentDateTime, setCurrentDateTime] = useState(null); // State to hold current date and time
+
+  useEffect(() => {
+    setCurrentDateTime(new Date().toISOString());
+  }, []);
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
@@ -60,7 +63,7 @@ export default function Addusers() {
       setSelectedSemester(8);
     } else {
       setSelectedSemester(-1);
-      setSelectedSection('X');
+      setSelectedSection("X");
     }
   };
 
@@ -79,12 +82,16 @@ export default function Addusers() {
 
   const handleAdduser = (event) => {
     event.preventDefault();
-  
+
     if (
-      newuser.name.trim() !== "" &&
-      newuser.email.trim() !== "" &&
-      (selectedCategory !== "Student" && selectedCategory !== "Final Year Student") ||
-      (selectedSemester !== null && selectedSemester !== -1 && selectedSection !== null && selectedSection !== "X")
+      (newuser.name.trim() !== "" &&
+        newuser.email.trim() !== "" &&
+        selectedCategory !== "Student" &&
+        selectedCategory !== "Final Year Student") ||
+      (selectedSemester !== null &&
+        selectedSemester !== -1 &&
+        selectedSection !== null &&
+        selectedSection !== "X")
     ) {
       setUserDetails((prevDetails) => [
         ...prevDetails,
@@ -96,25 +103,30 @@ export default function Addusers() {
           Section: selectedSection,
         },
       ]);
-  
+
       setJsonData((prevData) => [
         ...prevData,
         { Name: newuser.name, Email: newuser.email, Section: selectedSection },
       ]);
-  
+
       setNewuser({ name: "", email: "" });
     } else {
       // Display an error message or handle the invalid input case
       console.log("Invalid input. Please check your entries.");
     }
   };
-  
 
   const handleUploadBtnClick = () => {
     if (
-      selectedCategory === "Student" &&
-      selectedSemester !== -1 &&
-      selectedSection.trim() !== "" 
+      (selectedCategory === "Student" &&
+        selectedSemester !== -1 &&
+        selectedSection.trim() !== "") ||
+      (selectedCategory === "Final Year Student" &&
+        selectedSemester === 8 &&
+        selectedSection.trim() !== "") ||
+      ((selectedCategory === "Organization" || selectedCategory === "Alumni") &&
+        selectedSemester === -1 &&
+        selectedSection.trim() !== "")
     ) {
       fileInputRef.current.click();
     } else {
@@ -159,7 +171,7 @@ export default function Addusers() {
             Email: user.Email,
             Category: selectedCategory,
             Semester: selectedSemester,
-            Section: selectedSection
+            Section: selectedSection,
           }));
 
           setUserDetails((prevDetails) => [
@@ -180,6 +192,26 @@ export default function Addusers() {
     setUserDetails((prevDetails) =>
       prevDetails.filter((_, index) => index !== indexToDelete)
     );
+  };
+
+  const handleMarkSemesterEnd = async () => {
+    try {
+      const response = await fetch(`${baseURL}/marksemesterend`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to mark semester end");
+      }
+
+      // Handle success
+      console.log("Semester marked as ended successfully");
+    } catch (error) {
+      console.error("Error marking semester end:", error);
+    }
   };
 
   const HandleConfirmBtnClick = async (event) => {
@@ -217,6 +249,9 @@ export default function Addusers() {
           <Sidenav active="Users" />
           <div className="addAdminPageContainer">
             <div className="manualcard">
+              <div className="marksemesterend">
+                <button onClick={handleMarkSemesterEnd}>Mark Semester End</button>
+              </div>
               <form>
                 <input
                   type="text"
@@ -234,7 +269,7 @@ export default function Addusers() {
                   onChange={handleInputChange}
                   required
                 />
-                
+
                 <button className="add-btn" onClick={handleAdduser}>
                   Add
                 </button>
@@ -281,21 +316,21 @@ export default function Addusers() {
                 )}
               </div>
               <div className="section">
-              {selectedCategory === "Student" ||
+                {selectedCategory === "Student" ||
                 selectedCategory === "Final Year Student" ? (
                   <>
-                  <label>Section</label>
-                  <select
-                    value={selectedSection}
-                    onChange={handleSectionChange}
-                    required
-                  >
-                    <option value="">Select Section</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="S">S</option>
-                  </select>
+                    <label>Section</label>
+                    <select
+                      value={selectedSection}
+                      onChange={handleSectionChange}
+                      required
+                    >
+                      <option value="">Select Section</option>
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                      <option value="S">S</option>
+                    </select>
                   </>
                 ) : null}
               </div>

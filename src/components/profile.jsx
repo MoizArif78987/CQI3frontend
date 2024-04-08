@@ -1,22 +1,18 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useContext } from "react"; // Step 1
 import "./profile.css";
 import Topnav from "./topnav";
 import Sidenav from "./sidenav";
-import pfp from '../images/pfp.png'
+import pfp from '../images/pfp.png';
 import { useAdminContext } from '../context/AdminContext';
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import useRequireAuth from "../hooks/useRequireAuth"
+import useRequireAuth from "../hooks/useRequireAuth";
 const baseURL = process.env.REACT_APP_BASE_URL;
 
 export default function Profile() {
-
-
   const history = useHistory();
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const { setAdminName } = useAdminContext();
-  const { setAdminEmail } = useAdminContext();
+  const { setAdminName, adminEmail } = useAdminContext(); // Step 2
 
   useRequireAuth(isAuthenticated);
 
@@ -30,7 +26,6 @@ export default function Profile() {
         if (response.ok) {
           const data = await response.json();
           setAdminName(data.user_name);
-          setAdminEmail(data.user_email);
         }
         else{
           history.push('/');
@@ -44,19 +39,41 @@ export default function Profile() {
     };
 
     checkAuthentication();
-  }, [history, isAuthenticated]);
-
+  }, [history, isAuthenticated, setAdminName]);
 
   const { adminName } = useAdminContext();
-  const { adminEmail } = useAdminContext();
 
   const [profile, setProfile] = useState({ Name: adminName, Email: adminEmail, Password: 'SuperAdminUET' });
-  const HandleInputChange = (event) => {
+
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
     setProfile((prevProfile) => ({
       ...prevProfile,
       [name]: value,
     }));
+  };
+
+  const handleUpdateProfile = async () => {
+    try {
+      const response = await fetch(`${baseURL}/updateInfo`, { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...profile,
+          adminEmail: adminEmail,
+        }),
+      });
+
+      if (response.ok) {
+        console.log('Profile updated successfully');
+      } else {
+        console.error('Failed to update profile');
+      }
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
   };
   
   return (
@@ -75,17 +92,17 @@ export default function Profile() {
               <form>
                 <div className="labelDiv">
                   <label>Name</label>
-                  <input type="text" name="Name" value={profile.Name} onChange={HandleInputChange}/>
+                  <input type="text" name="Name" value={profile.Name} onChange={handleInputChange}/>
                 </div>
                 <div className="labelDiv">
                   <label>Email</label>
-                  <input type="email" name="Email" value={profile.Email} onChange={HandleInputChange}/>
+                  <input type="email" name="Email" value={profile.Email} onChange={handleInputChange}/>
                 </div>
                 <div className="labelDiv">
                   <label>Password</label>
-                  <input type="password" name="Password" value={profile.Password} onChange={HandleInputChange}/>
+                  <input type="password" name="Password" value={profile.Password} onChange={handleInputChange}/>
                 </div>
-                <button>Update</button>
+                <button type="button" onClick={handleUpdateProfile}>Update</button>
               </form>
             </div>
           </div>

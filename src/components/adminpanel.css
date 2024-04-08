@@ -42,6 +42,30 @@
     padding-left: 2%;
     padding-right: 2%;
 }
+.adminpanelPage .ContainerWithSideNav .StatsPageContainer .RegisterationGraphPanel {
+    margin-top: 2%;
+    height: 55%;
+    width: 90%;
+    margin-left: 5%;
+    box-shadow: 0.5px 0.5px 15px 0.5px rgb(173, 173, 173);
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(100%, 1fr)); /* Adjust height as needed */
+    grid-template-columns: repeat(2, 1fr); /* Two columns per row */
+    overflow-y: scroll;
+}
+
+.adminpanelPage .ContainerWithSideNav .StatsPageContainer .RegisterationGraphPanel .bargraph {
+    height: 100%;
+    width: 88%;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 20px;
+}
+
+.adminpanelPage .ContainerWithSideNav .StatsPageContainer .RegisterationGraphPanel .bargraph h2{
+    margin-left: 20px;
+}
+
 @media only screen and (max-width:850px){
     .adminpanelPage .ContainerWithSideNav .StatsPageContainer .surveygraphpanel{
         grid-template-columns: repeat(2,1fr);

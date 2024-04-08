@@ -5,12 +5,17 @@ import { Link, useHistory } from "react-router-dom/cjs/react-router-dom";
 import { useAdminContext } from '../context/AdminContext';
 const baseURL = process.env.REACT_APP_BASE_URL;
 
-
 export default function Authorization() {
   const history = useHistory();
   const { setAdminName } = useAdminContext();
   const { setAdminEmail } = useAdminContext();
-  
+
+  // State variable for form data
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
   useEffect(() => {
     const checkAuthentication = async () => {
       try {
@@ -33,12 +38,6 @@ export default function Authorization() {
 
     checkAuthentication();
   }, [history, setAdminName]);
-
-  // State variable for form data
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
 
   // Event handler for form submission
   const handleSubmit = async (e) => {
@@ -80,6 +79,30 @@ export default function Authorization() {
     }));
   };
 
+  // Event handler for forgot password
+  const handleForgotPassword = async () => {
+    try {
+      // Send request to backend for forgot password
+      const response = await fetch(`${baseURL}/forgotpassword`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: formData.email }), // Pass email address
+      });
+
+      if (!response.ok) {
+        throw new Error("Forgot password request failed");
+      }
+
+      // Handle successful forgot password request
+      // You may display a message to the user indicating that the reset instructions have been sent
+    } catch (error) {
+      console.error("Error:", error);
+      // Handle error
+    }
+  };
+
   return (
     <>
       <div className="authPage">
@@ -118,7 +141,7 @@ export default function Authorization() {
                 </div>
               </div>
               <div className="forgotPassword">
-                <p>forgot password?</p>
+                <p onClick={handleForgotPassword}>forgot password?</p>
               </div>
             </form>
           </div>

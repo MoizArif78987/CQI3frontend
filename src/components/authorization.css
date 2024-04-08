@@ -92,5 +92,6 @@
 .authPage .loginCard form .forgotPassword{
     height: 5%;
     text-align: center;
-    font-size: 12px
+    font-size: 12px;
+    cursor: pointer;
 }

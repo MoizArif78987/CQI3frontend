@@ -138,6 +138,7 @@ export default function Addteachers() {
       if (response.ok) {
         // Handle success, maybe show a success message or redirect
         console.log("Teachers added successfully!");
+        setJsonData([]);
       } else {
         // Handle error, maybe show an error message
         console.error("Failed to add teachers.");
@@ -229,8 +230,6 @@ export default function Addteachers() {
                         <th>Sr#</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Section</th>
-                        <th>Semester</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -243,8 +242,6 @@ export default function Addteachers() {
                           <td>{index + 1}</td>
                           <td>{item.Name}</td>
                           <td>{item.Email}</td>
-                          <td>{item.Section}</td>
-                          <td>{item.Semester}</td>
                           <td>
                             <button className="del-btn" onClick={() => handleDelete(index)}>
                               <img src={delIcon} alt="Loading" />

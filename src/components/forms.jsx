@@ -52,8 +52,6 @@ export default function Forms() {
   }, [history, isAuthenticated]);
 
 
-
-  
   useEffect(() => {
     async function fetchData() {
       try {
@@ -188,14 +186,6 @@ export default function Forms() {
                   </div>
                 </div>
               </Link>
-
-
-
-              
-
-
-
-
             </div>
           </div>
         </div>

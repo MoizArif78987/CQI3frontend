@@ -17,6 +17,8 @@ const Result = () => {
   const [resultData, setResultData] = useState([]);
   const [uniqueTeachers, setUniqueTeachers] = useState([]);
   const [uniqueQuestions, setUniqueQuestions] = useState([]);
+  const [semesterDates, setSemesterDates] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null); // New state for selected date
 
   useRequireAuth(isAuthenticated);
 
@@ -46,6 +48,26 @@ const Result = () => {
   }, [history, isAuthenticated]);
 
   useEffect(() => {
+    const fetchSemesterDates = async () => {
+      try {
+        const response = await fetch(`${baseURL}/getsemesters`);
+
+        if (response.ok) {
+          const data = await response.json();
+          setSemesterDates(data.semesterDates);
+        } else {
+          throw new Error("Failed to fetch semester dates");
+        }
+      } catch (error) {
+        console.error("Error fetching semester dates:", error);
+        // Handle the error case, such as displaying an error message
+      }
+    };
+
+    fetchSemesterDates();
+  }, []);
+
+  useEffect(() => {
     // Extract unique teacher names and questions
     const teachersSet = new Set(resultData.map((item) => item.teacher_name));
     const questionsSet = new Set(resultData.map((item) => item.question_text));
@@ -72,12 +94,24 @@ const Result = () => {
     setSelectedSection(event.target.value);
   };
 
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
   const handleRetreiveDataClick = async () => {
-    if (selectedSemester !== null && selectedSection !== "") {
+    if (
+      selectedSemester !== null &&
+      selectedSection !== ""
+    ) {
+      if( selectedDate == "")
+      {
+        setSelectedDate(null);
+      }
       const dataSent = {
         category: selectedCategory,
         semester: selectedSemester,
         section: selectedSection,
+        date: selectedDate, // Include selected date in the data sent to backend
       };
 
       try {
@@ -100,7 +134,7 @@ const Result = () => {
         // Handle the error case, such as displaying an error message
       }
     } else {
-      window.alert("Semester and section values cannot be null.");
+      window.alert("Semester, section, and date values cannot be null.");
     }
   };
 
@@ -197,6 +231,25 @@ const Result = () => {
                     </select>
                   </>
                 ) : null}
+                {/* Dropdown for selecting semester dates */}
+                {selectedCategory === "Student" ||
+                selectedCategory === "Final Year Student" ? (
+                  <>
+                    <label>Semester Date</label>
+                    <select
+                      value={selectedDate}
+                      onChange={handleDateChange}
+                      required
+                    >
+                      <option value="">Select Semester Date</option>
+                      {semesterDates.map((date, index) => (
+                        <option key={index} value={date}>
+                          {date}
+                        </option>
+                      ))}
+                    </select>
+                  </>
+                ) : null}
               </div>
             </div>
             <div className="resultDisplayAndDownload">
@@ -257,7 +310,7 @@ const Result = () => {
                       </React.Fragment>
                     ))}
                   </tbody>
-                </table>
+                </table>{" "}
               </div>
 
               <div className="downloadButton">

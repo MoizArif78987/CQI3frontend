@@ -2,16 +2,14 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useAdminContext } from '../context/AdminContext';
-import useRequireAuth from "../hooks/useRequireAuth"
+import { useAdminContext } from "../context/AdminContext";
+import useRequireAuth from "../hooks/useRequireAuth";
 import "./addform.css";
 import Topnav from "./topnav";
 
 const baseURL = process.env.REACT_APP_BASE_URL;
 
 export default function Addform() {
-
-
   const history = useHistory();
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const { setAdminName } = useAdminContext();
@@ -23,29 +21,26 @@ export default function Addform() {
     const checkAuthentication = async () => {
       try {
         const response = await fetch(`${baseURL}/checkauthentication`, {
-          credentials: 'include',
+          credentials: "include",
         });
 
         if (response.ok) {
           const data = await response.json();
           setAdminName(data.user_name);
           setAdminEmail(data.user_email);
-        }
-        else{
-          history.push('/');
+        } else {
+          history.push("/");
           setIsAuthenticated(false);
         }
       } catch (error) {
-        console.error('Error checking authentication:', error);
-        history.push('/');
+        console.error("Error checking authentication:", error);
+        history.push("/");
         setIsAuthenticated(false);
       }
     };
 
     checkAuthentication();
   }, [history, isAuthenticated]);
-
-
 
   const [totalSubjects, setTotalSubjects] = useState("");
   const [electivesCount, setElectivesCount] = useState("");
@@ -203,7 +198,7 @@ export default function Addform() {
       totalSubjects,
       electivesCount,
       electivesData,
-      selectedSemester
+      selectedSemester,
     };
     console.log(registrationData);
 
@@ -250,14 +245,16 @@ export default function Addform() {
             formTitle: formData.formTitle,
             category: formData.category,
             titles: formData.titles,
-            teacherMapping: document.querySelector('.switch input').checked ? 1 : 0,
+            teacherMapping: document.querySelector(".switch input").checked
+              ? 1
+              : 0,
           }),
         });
-  
+
         if (!response.ok) {
           throw new Error("Failed to submit the data");
         }
-  
+
         const responseData = await response.json();
         console.log(responseData);
       } catch (error) {
@@ -265,7 +262,7 @@ export default function Addform() {
       }
     }
   };
-  
+
   return (
     <>
       <div className="addformPage">
@@ -382,12 +379,15 @@ export default function Addform() {
                   </div>
 
                   <div className="TeacherMapping">
-                    <center>
-                    <label className="switch">
-                      <input type="checkbox" />
-                      <span className="slider"/>
-                    </label>
-                    </center>
+                    <div><h3 style={{marginRight:'10px'}}>Teacher Mapping</h3></div>
+                    <div>
+                      <center>
+                        <label className="switch">
+                          <input type="checkbox" />
+                          <span className="slider" />
+                        </label>
+                      </center>
+                    </div>
                   </div>
 
                   <div className="category">
