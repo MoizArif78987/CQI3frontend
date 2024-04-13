@@ -1,6 +1,12 @@
 .FormPage {
     height: 100vh;
     width: 100vw;
+    transition: ease-in-out 0.3s;
+}
+.FormPage.dark-mode{
+    background-color: #212121;
+    color:white;
+    transition: ease-in-out 0.3s;
 }
 .FormPage .loader{
     height: 100%;
@@ -11,7 +17,7 @@
 }
 
 .FormPage .header {
-    height: 10%;
+    height: 8%;
     width: 100%;
     padding-top: 20px;
     text-align: center;
@@ -26,7 +32,7 @@
     height: 80%;
     width: 80%;
     border: 2px solid white;
-    background-color: rgba(255, 255, 255, 0.715);
+    background-color: transparent;
     box-shadow: -5px 5px 10px 5px rgba(0, 0, 0, 0.6);
     border-radius: 25px;
     margin-left: 10%;
@@ -99,8 +105,11 @@
     padding-left: 10px;
     font-size: 15px;
     color: black;
+    background-color: transparent;
 }
-
+.FormPage.dark-mode .FormContainer .FormQuestions .TextInputContainer input{
+    color: white;
+}
 .FormPage .FormContainer .submit-btn{
     color: white;
     font-size: 20px;

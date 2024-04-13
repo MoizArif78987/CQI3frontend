@@ -4,13 +4,14 @@ import BeatLoader from "react-spinners/BeatLoader";
 import "./form.css";
 import { useAdminContext } from "../context/AdminContext";
 import useRequireAuth from "../hooks/useRequireAuth";
+import Formnav from "./formnav";
 
 const baseURL = process.env.REACT_APP_BASE_URL;
 
 export default function Form() {
   const history = useHistory();
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const { setAdminName, setAdminEmail } = useAdminContext();
+  const { setAdminName, setAdminEmail,darkmode } = useAdminContext();
 
   const { id, userid, teacherid } = useParams();
   const form_id = id;
@@ -199,7 +200,9 @@ export default function Form() {
           </div>
         </div>
       ) : (
-        <div className="FormPage">
+        <div className={`FormPage ${darkmode ? 'dark-mode' : ''}`}>
+              <Formnav/>
+
           <div className="header">
             <h1>{formdata.formTitle}</h1>
           </div>

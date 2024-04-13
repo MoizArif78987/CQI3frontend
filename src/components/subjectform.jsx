@@ -3,6 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import "./subjectform.css";
 import { useAdminContext } from "../context/AdminContext";
 import useRequireAuth from "../hooks/useRequireAuth";
+import Formnav from "./formnav";
 const baseURL = process.env.REACT_APP_BASE_URL;
 
 const Subjectform = () => {
@@ -16,7 +17,7 @@ const Subjectform = () => {
   const [selectedSubjects, setSelectedSubjects] = useState([]); // State to store selected subjects
   const history = useHistory();
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const { setAdminName, setAdminEmail } = useAdminContext();
+  const { setAdminName, setAdminEmail, darkmode } = useAdminContext();
 
   useRequireAuth(isAuthenticated);
 
@@ -108,7 +109,8 @@ const Subjectform = () => {
 
   return (
     <>
-      <div className="subjectRegformPageContainer">
+      <div className={`subjectRegformPageContainer ${darkmode ? 'dark-mode' : ''}`}>
+          <Formnav/>
         <div className="subjectRegformPage">
           <div className="FormContainer">
             <div className="checkboxes">
