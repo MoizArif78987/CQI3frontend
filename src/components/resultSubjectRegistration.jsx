@@ -10,7 +10,7 @@ const baseURL = process.env.REACT_APP_BASE_URL;
 const ResultSubjectRegistration = () => {
   const history = useHistory();
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const { setAdminName, setAdminEmail } = useAdminContext();
+  const { setAdminName, setAdminEmail , darkmode} = useAdminContext();
   const [subjectList, setSubjectList] = useState([]);
   const [selectedSubject, setSelectedSubject] = useState({ id: "", name: "" });
   const [responseData, setResponseData] = useState(null); // State to hold response data
@@ -146,7 +146,7 @@ const ResultSubjectRegistration = () => {
 
   return (
     <>
-      <div className="ResultPage">
+      <div className={`ResultPage  ${darkmode ? 'dark-mode' : ''}`}>
         <Topnav />
         <div className="ContainerWithSideNav">
           <Sidenav active="Registered Subjects" />
@@ -167,7 +167,7 @@ const ResultSubjectRegistration = () => {
                 </select>
               </div>
               {/* Display dropdown for selecting semester date */}
-              <div className="SemesterDate">
+              <div className="restOfTheInputs">
                 <label>Select Semester Date:</label>
                 <select value={selectedDate} onChange={handleDateChange}>
                   <option value="">Select Date</option>

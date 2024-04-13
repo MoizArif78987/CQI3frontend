@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./sidenav.css";
+import { useAdminContext } from "../context/AdminContext";
 
 export default function Sidenav(props) {
   const [collapsed, setCollapsed] = useState(false);
+  const { darkmode } = useAdminContext();
 
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
@@ -16,7 +18,7 @@ export default function Sidenav(props) {
         <div className="toggle-line"></div>
         <div className="toggle-line"></div>
       </button>
-      <div className={`sidenav ${collapsed ? "collapsed" : ""}`}>
+      <div className={`sidenav ${collapsed ? "collapsed" : ""}  ${darkmode ? 'dark-mode' : ''}`}>
         <div className="content">
           {props.active === "Stats" ? (
             <Link to="/adminpanel">

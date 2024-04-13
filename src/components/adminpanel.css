@@ -1,6 +1,12 @@
 .adminpanelPage{
     height: 100vh;
     width:100vw;
+    transition: ease-in-out 0.3s;
+}
+.adminpanelPage.dark-mode{
+    background-color: #212121;
+    color:white;
+    transition: ease-in-out 0.3s;
 }
 .adminpanelPage .ContainerWithSideNav{
     height: 93%;
@@ -57,7 +63,7 @@
 .adminpanelPage .ContainerWithSideNav .StatsPageContainer .RegisterationGraphPanel .bargraph {
     height: 100%;
     width: 88%;
-    border: 1px solid black;
+    border: 1px solid rgb(211, 211, 211);
     padding: 10px;
     margin: 20px;
 }

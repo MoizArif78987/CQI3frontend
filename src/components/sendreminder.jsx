@@ -11,7 +11,7 @@ const baseURL = process.env.REACT_APP_BASE_URL;
 export default function SendReminder() {
   const history = useHistory();
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const { setAdminName, setAdminEmail } = useAdminContext();
+  const { setAdminName, setAdminEmail , darkmode} = useAdminContext();
 
   useRequireAuth(isAuthenticated);
 
@@ -203,9 +203,7 @@ export default function SendReminder() {
 
   return (
     <>
-    {console.log(jsonData)}
-    {console.log(userDetails)}
-      <div className="addadminPage">
+      <div className={`addadminPage ${darkmode ? 'dark-mode' : ''}`}>
         <Topnav />
         <div className="ContainerWithSideNav">
           <Sidenav active="Send Reminders" />

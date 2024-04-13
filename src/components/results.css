@@ -1,6 +1,12 @@
 .ResultPage {
   height: 100vh;
   width: 100vw;
+  transition: ease-in-out 0.3s;
+}
+.ResultPage.dark-mode {
+  background-color: #212121;
+  color: white;
+  transition: ease-in-out 0.3s;
 }
 .ResultPage .ContainerWithSideNav {
   height: 93%;
@@ -21,7 +27,7 @@
   justify-content: space-around;
   align-items: center;
 }
-.ResultPage .ContainerWithSideNav .ResultPageContainer .resultInputs label{
+.ResultPage .ContainerWithSideNav .ResultPageContainer .resultInputs label {
   margin-left: 10px;
   margin-right: 2px;
 }
@@ -65,6 +71,15 @@
   font-size: 20px;
   font-weight: 600;
 }
+.ResultPage.dark-mode
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultInputs
+  .Category
+  select {
+  background-color: #212121;
+  color: white;
+}
 .ResultPage
   .ContainerWithSideNav
   .ResultPageContainer
@@ -74,6 +89,17 @@
   font-size: 15px;
   font-weight: 500;
 }
+
+.ResultPage.dark-mode
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultInputs
+  .restOfTheInputs
+  select {
+  background-color: #212121;
+  color: white;
+}
+
 .ResultPage
   .ContainerWithSideNav
   .ResultPageContainer
@@ -166,6 +192,16 @@
   background-color: #fff; /* Even rows have white background */
 }
 
+.ResultPage.dark-mode
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultDisplayAndDownload
+  .resultDisplay
+  table
+  tbody
+  tr:nth-child(even) {
+  background-color: #212121; /* Even rows have white background */
+}
 .ResultPage
   .ContainerWithSideNav
   .ResultPageContainer
@@ -180,7 +216,16 @@
     230
   ); /* Odd rows have rgb(230, 230, 230) background */
 }
-
+.ResultPage.dark-mode
+  .ContainerWithSideNav
+  .ResultPageContainer
+  .resultDisplayAndDownload
+  .resultDisplay
+  table
+  tbody
+  tr:nth-child(odd) {
+  background-color: #3b3b3b;
+  }
 .ResultPage
   .ContainerWithSideNav
   .ResultPageContainer
@@ -241,7 +286,7 @@
   height: 40px;
   width: 65%;
   border: 0px transparent;
-  background-color: rgb(2, 182, 2);;
+  background-color: rgb(2, 182, 2);
   color: white;
   border-radius: 5px;
 }

@@ -5,6 +5,10 @@
   box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, 0.251);
   transition: width 0.3s ease;
 }
+.sidenav.dark-mode{
+  background-color: #171717;
+  transition: ease-in-out 0.3s;
+}
 .toggle{
     margin-top: 10px;
     height: 40px;
@@ -38,11 +42,16 @@
   margin-left: 5%;
   margin-top: 5px;
   background-color: transparent;
+  color: black;
   border-bottom: 1px solid black;
   border-top: transparent;
   border-left: transparent;
   border-right: transparent;
   cursor: pointer;
+}
+.sidenav.dark-mode .content .sidenavbtn{
+  color: white;
+  border-bottom: 1px solid white;
 }
 .sidenav .content .sidenavbtn:hover{
   color: rgb(33, 170, 255);

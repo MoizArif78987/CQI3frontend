@@ -14,6 +14,7 @@ export default function Addform() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const { setAdminName } = useAdminContext();
   const { setAdminEmail } = useAdminContext();
+  const { darkmode } = useAdminContext();
 
   useRequireAuth(isAuthenticated);
 
@@ -265,7 +266,7 @@ export default function Addform() {
 
   return (
     <>
-      <div className="addformPage">
+      <div className={`addformPage ${darkmode ? 'dark-mode' : ''}`}>
         <Topnav />
         <div className="addformcontainer">
           <div className="tabsContainer">

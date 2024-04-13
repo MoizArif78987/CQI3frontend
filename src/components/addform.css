@@ -2,8 +2,13 @@
     height: 100vh;
     width: 100vw;
     overflow-x: hidden;
+    transition: ease-in-out 0.3s;
 }
-
+.addformPage.dark-mode {
+    background-color: #212121;
+    color: white;
+    transition: ease-in-out 0.3s;
+  }
 .addformPage .addformcontainer {
     height: 93%;
     width: 100%;
@@ -257,6 +262,7 @@
     padding-left: 10px;
     border-radius: 10px;
     color: #053872;
+    background-color: transparent;
 }
 .addformPage .addformcontainer .RegitrationContainer form select{
     display: block;
@@ -269,6 +275,9 @@
     padding-left: 10px;
     border-radius: 10px;
     color: #053872;
+}
+.addformPage.dark-mode .addformcontainer .RegitrationContainer form select{
+background-color: #212121;
 }
 .addformPage .addformcontainer .RegitrationContainer form .subjectDiv {
     height: 40px;
@@ -287,6 +296,7 @@
     border-radius: 10px;
     padding-left: 10px;
     color: #053872;
+    background-color: transparent;
 }
 
 .addformPage .addformcontainer .RegitrationContainer form .numbeript::placeholder,

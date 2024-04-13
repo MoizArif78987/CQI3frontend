@@ -9,6 +9,7 @@ export default function Authorization() {
   const history = useHistory();
   const { setAdminName } = useAdminContext();
   const { setAdminEmail } = useAdminContext();
+  const { darkmode } = useAdminContext();
 
   // State variable for form data
   const [formData, setFormData] = useState({
@@ -105,7 +106,7 @@ export default function Authorization() {
 
   return (
     <>
-      <div className="authPage">
+      <div className={`authPage  ${darkmode ? 'dark-mode' : ''}`}>
         <div className="LoginContainer">
           <div className="cardheader">
             <img src={uetLogo} alt="Loading..." />

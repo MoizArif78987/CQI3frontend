@@ -12,7 +12,7 @@ const baseURL = process.env.REACT_APP_BASE_URL;
 export default function Profile() {
   const history = useHistory();
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const { setAdminName, adminEmail } = useAdminContext(); // Step 2
+  const { setAdminName, adminEmail,darkmode } = useAdminContext();
 
   useRequireAuth(isAuthenticated);
 
@@ -78,7 +78,7 @@ export default function Profile() {
   
   return (
     <>
-      <div className="profilePage">
+      <div className={`profilePage  ${darkmode ? 'dark-mode' : ''}`}>
         <Topnav />
         <div className="ContainerWithSideNav">
           <Sidenav active="Profile" />

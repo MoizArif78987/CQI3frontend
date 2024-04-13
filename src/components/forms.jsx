@@ -19,6 +19,7 @@ export default function Forms() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const { setAdminName } = useAdminContext();
   const { setAdminEmail } = useAdminContext();
+  const { darkmode } = useAdminContext();
   const [forms, setForms] = useState([]);
   const [subjectforms, setSubjectforms] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -95,7 +96,7 @@ export default function Forms() {
 
   return (
     <>
-      <div className="formsPage">
+      <div className={`formsPage ${darkmode ? 'dark-mode' : ''}`}>
         <Topnav />
         <div className="ContainerWithSideNav">
           <Sidenav active="Forms" />

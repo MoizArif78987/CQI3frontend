@@ -10,7 +10,7 @@ const baseURL = process.env.REACT_APP_BASE_URL;
 const Result = () => {
   const history = useHistory();
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const { setAdminName, setAdminEmail } = useAdminContext();
+  const { setAdminName, setAdminEmail,darkmode } = useAdminContext();
   const [selectedCategory, setSelectedCategory] = useState("Student");
   const [selectedSemester, setSelectedSemester] = useState(null);
   const [selectedSection, setSelectedSection] = useState("");
@@ -177,7 +177,7 @@ const Result = () => {
 
   return (
     <>
-      <div className="ResultPage">
+      <div className={`ResultPage  ${darkmode ? 'dark-mode' : ''}`}>
         <Topnav />
         <div className="ContainerWithSideNav">
           <Sidenav active="Results" />

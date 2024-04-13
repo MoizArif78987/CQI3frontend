@@ -19,6 +19,8 @@ export default function Addadmin() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const { setAdminName } = useAdminContext();
   const { setAdminEmail } = useAdminContext();
+  const { darkmode } = useAdminContext();
+
 
   useRequireAuth(isAuthenticated);
 
@@ -141,7 +143,7 @@ export default function Addadmin() {
 
   return (
     <>
-      <div className="addadminPage">
+      <div className={`addadminPage ${darkmode ? 'dark-mode' : ''}`}>
         <Topnav />
         <div className="ContainerWithSideNav">
           <Sidenav active="Admins" />

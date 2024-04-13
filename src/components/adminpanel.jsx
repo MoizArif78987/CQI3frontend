@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import BeatLoader from "react-spinners/BeatLoader";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from "chart.js";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+} from "chart.js";
 import Topnav from "./topnav";
 import Sidenav from "./sidenav";
 import "./adminpanel.css";
@@ -11,13 +19,21 @@ import useRequireAuth from "../hooks/useRequireAuth";
 import _ from "lodash";
 const baseURL = process.env.REACT_APP_BASE_URL;
 
-ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale,LinearScale,BarElement);
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement
+);
 
 export default function Adminpanel() {
   const history = useHistory();
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const { setAdminName } = useAdminContext();
   const { setAdminEmail } = useAdminContext();
+  const { darkmode } = useAdminContext();
 
   useRequireAuth(isAuthenticated);
 
@@ -103,15 +119,18 @@ export default function Adminpanel() {
   const generateBarData = (semesterData) => {
     const labels = [];
     const data = [];
-  
+
     for (const semester in semesterData) {
       const semesterSubject = semesterData[semester];
-      const percentageReserved = ((semesterSubject.Seats - semesterSubject.available_seats) / semesterSubject.Seats) * 100;
-  
+      const percentageReserved =
+        ((semesterSubject.Seats - semesterSubject.available_seats) /
+          semesterSubject.Seats) *
+        100;
+
       labels.push(semesterSubject.SubjectName);
       data.push(percentageReserved.toFixed(2)); // Round to 2 decimal places
     }
-  
+
     return {
       labels: labels,
       datasets: [
@@ -123,13 +142,13 @@ export default function Adminpanel() {
       ],
     };
   };
-  
+
   const pieOptions = {};
   const barOptions = {};
 
   return (
     <>
-      <div className="adminpanelPage">
+       <div className={`adminpanelPage ${darkmode ? 'dark-mode' : ''}`}>
         <Topnav />
         <div className="ContainerWithSideNav">
           <Sidenav active="Stats" />
