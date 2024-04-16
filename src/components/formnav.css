@@ -88,6 +88,9 @@
   }
 
 @media only screen and (max-width:700px){
+      .navbar .logo {
+    width: 30%;
+  }
     .navbar .logo .DarkModeToggle {
          margin-left: 100px;
     }
