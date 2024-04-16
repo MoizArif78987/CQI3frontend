@@ -4,6 +4,7 @@ import BeatLoader from "react-spinners/BeatLoader";
 import "./form.css";
 import { useAdminContext } from "../context/AdminContext";
 import useRequireAuth from "../hooks/useRequireAuth";
+import Topnav from "./topnav";
 import Formnav from "./formnav";
 
 const baseURL = process.env.REACT_APP_BASE_URL;
@@ -11,7 +12,7 @@ const baseURL = process.env.REACT_APP_BASE_URL;
 export default function Form() {
   const history = useHistory();
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const { setAdminName, setAdminEmail,darkmode } = useAdminContext();
+  const { setAdminName, setAdminEmail, darkmode } = useAdminContext();
 
   const { id, userid, teacherid } = useParams();
   const form_id = id;
@@ -50,6 +51,20 @@ export default function Form() {
           const authData = await authResponse.json();
           setAdminName(authData.user_name);
           setAdminEmail(authData.user_email);
+        }
+        const responseExistenceResponse = await fetch(`${baseURL}/checkresponseexistance`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ form_id, user_id: userid, teacher_id: teacherid }),
+        });
+  
+        if (!responseExistenceResponse.ok) {
+          history.push("/formsubmitted")
+        } else {
+          console.error("Failed to check response existence");
+          // Handle failure to check response existence
         }
 
         // Fetch form data
@@ -171,11 +186,73 @@ export default function Form() {
       });
 
       // Optionally, you can handle success or redirect to a success page
-      console.log("Form submitted successfully!");
+      history.push("/formsubmitted");
+
     } catch (error) {
       console.error("Error submitting form:", error);
       // Optionally, you can handle errors or redirect to an error page
     }
+  };
+
+  const handleDeleteForm = async () => {
+    try {
+      // Check if form_id is present
+      if (!form_id) {
+        console.error("Missing form_id in the URL");
+        return;
+      }
+  
+      const response = await fetch(`${baseURL}/deleteform`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ form_id })
+      });
+      
+      if (response.ok) {
+        // Form deleted successfully
+        console.log("Form deleted successfully!");
+        history.push(`/forms`);
+      } else if (response.status === 401) {
+        // Responses exist for the form, deletion not allowed
+        console.error("Responses exist for this form. Deletion not allowed.");
+      } else {
+        // Handle other error cases
+        console.error("Form deletion failed:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error deleting form:", error);
+      // Optionally, you can handle errors or redirect to an error page
+    }
+  };
+  
+  const handleEditForm = () => {
+    // Redirect to the edit form page
+    history.push(`/editform/${form_id}`);
+  };
+
+  const renderEditDeleteButtons = () => {
+    // Check if userid or teacherid is present in the URL
+    if (userid || teacherid) {
+      // If either userid or teacherid is present, do not render edit and delete buttons
+      return <Formnav />;
+    }
+    // If neither userid nor teacherid is present, render edit and delete buttons
+    return (
+      <>
+      <Topnav/>
+      <div className="edit-delete-buttons">
+        <button className="edit-btn" onClick={handleEditForm}>
+          Edit
+        </button>
+        <button className="delete-btn" onClick={handleDeleteForm}>
+          Delete
+        </button>
+      </div>
+      </>
+    );
   };
 
   return (
@@ -201,7 +278,7 @@ export default function Form() {
         </div>
       ) : (
         <div className={`FormPage ${darkmode ? 'dark-mode' : ''}`}>
-              <Formnav/>
+          {renderEditDeleteButtons()}
 
           <div className="header">
             <h1>{formdata.formTitle}</h1>

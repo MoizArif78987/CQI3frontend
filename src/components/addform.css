@@ -1,321 +1,460 @@
 .addformPage {
-    height: 100vh;
-    width: 100vw;
-    overflow-x: hidden;
-    transition: ease-in-out 0.3s;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  transition: ease-in-out 0.3s;
 }
 .addformPage.dark-mode {
-    background-color: #212121;
-    color: white;
-    transition: ease-in-out 0.3s;
-  }
+  background-color: #212121;
+  color: white;
+  transition: ease-in-out 0.3s;
+}
 .addformPage .addformcontainer {
-    height: 93%;
-    width: 100%;
+  height: 93%;
+  width: 100%;
 }
 
 .addformPage .addformcontainer .tabsContainer {
-    height: 10%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 10%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .addformPage .addformcontainer .tabsContainer .tabs {
-    height: 100%;
-    width: 60%;
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-end;
+  height: 100%;
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
 }
 
 .addformPage .addformcontainer .tabsContainer .tabs .tab {
-    height: 80%;
-    width: 30%;
-    box-shadow: 0.5px 0.5px 10px 0.5px grey;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+  height: 80%;
+  width: 30%;
+  box-shadow: 0.5px 0.5px 10px 0.5px grey;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .addformPage .addformcontainer .tabsContainer .tabs .tab h4 {
-    margin: 0%;
-    text-align: center;
+  margin: 0%;
+  text-align: center;
 }
 
 .addformPage .addformcontainer .tabsContainer .tabs .active {
-    background-color: #053872;
-    color: white;
+  background-color: #053872;
+  color: white;
 }
-
-
 
 /* Survey Form CSS */
 .addformPage .addformcontainer .surveyContainer {
-    height: 85%;
-    width: 100%;
-    padding-top: 20px;
+  height: 85%;
+  width: 100%;
+  padding-top: 20px;
 }
 
 .addformPage .addformcontainer .surveyContainer form {
-    height: 100%;
-    width: 100%;
-    overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
 }
 
-.addformPage .addformcontainer .surveyContainer form .FormSpecs .TeacherMapping{
-    height: 50px;
-    width: 100%;
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.addformPage
+  .addformcontainer
+  .surveyContainer
+  form
+  .FormSpecs
+  .TeacherMapping {
+  height: 50px;
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.addformPage .addformcontainer .surveyContainer form .FormSpecs .TeacherMapping .switch{
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-    cursor: pointer;
-    margin-right: 50px;
+.addformPage
+  .addformcontainer
+  .surveyContainer
+  form
+  .FormSpecs
+  .TeacherMapping
+  .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  cursor: pointer;
+  margin-right: 50px;
 }
-.addformPage .addformcontainer .surveyContainer form .FormSpecs .TeacherMapping .switch input{
-    width: 0;
-    height: 0;
-    opacity: 0;
+.addformPage
+  .addformcontainer
+  .surveyContainer
+  form
+  .FormSpecs
+  .TeacherMapping
+  .switch
+  input {
+  width: 0;
+  height: 0;
+  opacity: 0;
 }
-.addformPage .addformcontainer .surveyContainer form .FormSpecs .TeacherMapping .switch .slider{
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: #CCCCCC;
-    transition: 0.3s ease-in-out;
-    border-radius: 34px;
+.addformPage
+  .addformcontainer
+  .surveyContainer
+  form
+  .FormSpecs
+  .TeacherMapping
+  .switch
+  .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #cccccc;
+  transition: 0.3s ease-in-out;
+  border-radius: 34px;
 }
-.addformPage .addformcontainer .surveyContainer form .FormSpecs .TeacherMapping .switch .slider::before{
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    bottom: 4px;
-    left: 4px;
-    background-color: white;
-    transition: 0.3s;
-    border-radius: 26px;
+.addformPage
+  .addformcontainer
+  .surveyContainer
+  form
+  .FormSpecs
+  .TeacherMapping
+  .switch
+  .slider::before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  bottom: 4px;
+  left: 4px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 26px;
 }
 
-.addformPage .addformcontainer .surveyContainer form .FormSpecs .TeacherMapping .switch input:checked +.slider::before{
-    transform: translateX(26px);
+.addformPage
+  .addformcontainer
+  .surveyContainer
+  form
+  .FormSpecs
+  .TeacherMapping
+  .switch
+  input:checked
+  + .slider::before {
+  transform: translateX(26px);
 }
 
-.addformPage .addformcontainer .surveyContainer form .FormSpecs .TeacherMapping .switch input:checked +.slider{
-    background-color: #053872;
+.addformPage
+  .addformcontainer
+  .surveyContainer
+  form
+  .FormSpecs
+  .TeacherMapping
+  .switch
+  input:checked
+  + .slider {
+  background-color: #053872;
 }
 
 .addformPage .addformcontainer .surveyContainer form .FormSpecs .category {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    color: #053872;
-    font-size: 17px;
-    font-weight: 500;
-    margin-top: 10px;
-    padding-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #053872;
+  font-size: 17px;
+  font-weight: 500;
+  margin-top: 10px;
+  padding-top: 10px;
 }
-
-.addformPage .addformcontainer .surveyContainer form .FormSpecs .category input {
-    height: 15px;
-    margin-right: 5px;
+.addformPage.dark-mode .addformcontainer .surveyContainer form .FormSpecs .category {
+    color: rgb(33, 170, 255);
+}
+.addformPage
+  .addformcontainer
+  .surveyContainer
+  form
+  .FormSpecs
+  .category
+  input {
+  height: 15px;
+  margin-right: 5px;
 }
 
 .addformPage .addformcontainer .surveyContainer form .titleContainer {
-    display: flex;
-    justify-content: space-around;
-    align-items: end;
-
+  display: flex;
+  justify-content: space-around;
+  align-items: end;
 }
 
 .addformPage .addformcontainer .surveyContainer form .questionContainer {
-    display: flex;
-    justify-content: space-around;
-    align-items: end;
-    margin-left: 10%;
+  display: flex;
+  justify-content: space-around;
+  align-items: end;
+  margin-left: 10%;
 }
 
-.addformPage .addformcontainer .surveyContainer form .questionContainer .checkBox {
-    height: 100%;
-    width: 10%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.addformPage
+  .addformcontainer
+  .surveyContainer
+  form
+  .questionContainer
+  .checkBox {
+  height: 100%;
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .addformPage .addformcontainer .surveyContainer form .titleContainer input,
 .addformPage .addformcontainer .surveyContainer form .questionContainer input {
-    height: 50px;
-    background-color: transparent;
-    color: #053872;
-    border: 1px solid grey;
-    border-radius: 10px;
-    padding-left: 10px;
-    font-size: 20px;
+  height: 50px;
+  background-color: transparent;
+  color: #053872;
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding-left: 10px;
+  font-size: 20px;
+}
+.addformPage.dark-mode
+  .addformcontainer
+  .surveyContainer
+  form
+  .titleContainer
+  input,
+.addformPage.dark-mode
+  .addformcontainer
+  .surveyContainer
+  form
+  .questionContainer
+  input {
+  color: rgb(33, 170, 255);
 }
 
-.addformPage .addformcontainer .surveyContainer form .titleContainer input::placeholder,
-.addformPage .addformcontainer .surveyContainer form .questionContainer input::placeholder {
-    color: #053872;
+.addformPage
+  .addformcontainer
+  .surveyContainer
+  form
+  .titleContainer
+  input::placeholder,
+.addformPage
+  .addformcontainer
+  .surveyContainer
+  form
+  .questionContainer
+  input::placeholder {
+  color: #053872;
 }
-
+.addformPage.dark-mode
+  .addformcontainer
+  .surveyContainer
+  form
+  .titleContainer
+  input::placeholder,
+  .addformPage.dark-mode
+  .addformcontainer
+  .surveyContainer
+  form
+  .questionContainer
+  input::placeholder{
+    color:rgb(33, 170, 255);
+  }
 .addformPage .addformcontainer .surveyContainer form .TitleInput {
-    width: 80%;
-    margin-left: 5%;
-    margin-top: 40px;
-    font-weight: 700;
+  width: 80%;
+  margin-left: 5%;
+  margin-top: 40px;
+  font-weight: 700;
 }
 
-.addformPage .addformcontainer .surveyContainer form .FormSpecs .titleInput center input {
-    height: 60px;
-    width: 50%;
-    background: transparent;
-    color: #053872;
-    border: 1px solid grey;
-    border-radius: 15px;
-    font-size: 20px;
-    font-weight: 700;
-    margin-top: 10px;
-    text-align: center;
+.addformPage
+  .addformcontainer
+  .surveyContainer
+  form
+  .FormSpecs
+  .titleInput
+  center
+  input {
+  height: 60px;
+  width: 50%;
+  background: transparent;
+  color: #053872;
+  border: 1px solid grey;
+  border-radius: 15px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 10px;
+  text-align: center;
+}
+.addformPage.dark-mode
+  .addformcontainer
+  .surveyContainer
+  form
+  .FormSpecs
+  .titleInput
+  center
+  input {
+    color: rgb(33, 170, 255);
+  }
+.addformPage
+  .addformcontainer
+  .surveyContainer
+  form
+  .FormSpecs
+  .titleInput
+  center
+  input::placeholder {
+  color: #053872;
 }
 
-.addformPage .addformcontainer .surveyContainer form .FormSpecs .titleInput center input::placeholder {
-    color: #053872;
-}
+.addformPage.dark-mode
+  .addformcontainer
+  .surveyContainer
+  form
+  .FormSpecs
+  .titleInput
+  center
+  input::placeholder{
+    color: rgb(33, 170, 255);
+  }
 
 .addformPage .addformcontainer .surveyContainer form .QuestionInput {
-    width: 70%;
-    margin-top: 10px;
-    font-weight: 400;
+  width: 70%;
+  margin-top: 10px;
+  font-weight: 400;
 }
-
 
 .addformPage .addformcontainer .surveyContainer form .titleContainer button,
 .addformPage .addformcontainer .surveyContainer form .questionContainer button {
-    height: 50px;
-    width: 70px;
-    color: white;
-    background-color: #053872;
-    border: 1px solid #053872;
-    border-radius: 20px;
+  height: 50px;
+  width: 70px;
+  color: white;
+  background-color: #053872;
+  border: 1px solid #053872;
+  border-radius: 20px;
 }
 
 .addformPage .addformcontainer .surveyContainer form .titleContainer .removebtn,
-.addformPage .addformcontainer .surveyContainer form .questionContainer .removebtn {
-    background-color: red;
-    border: 1px solid red;
+.addformPage
+  .addformcontainer
+  .surveyContainer
+  form
+  .questionContainer
+  .removebtn {
+  background-color: red;
+  border: 1px solid red;
 }
-
-
 
 .addformPage .addformcontainer .surveyContainer form .submit-btn {
-    color: white;
-    font-weight: 700;
-    position: relative;
-    height: 50px;
-    width: 20%;
-    left: 40%;
-    margin-top: 3%;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    border-color: #053872;
-    background-color: #053872;
-    font-size: 20px;
-    cursor: pointer;
+  color: white;
+  font-weight: 700;
+  position: relative;
+  height: 50px;
+  width: 20%;
+  left: 40%;
+  margin-top: 3%;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border-color: #053872;
+  background-color: #053872;
+  font-size: 20px;
+  cursor: pointer;
 }
-
 
 .addformPage .addformcontainer .RegitrationContainer {
-    height: 90%;
-    width: 100%;
+  height: 90%;
+  width: 100%;
 }
 
-.addformPage .addformcontainer .RegitrationContainer form{
-    width: 100%;
-    height: auto;
+.addformPage .addformcontainer .RegitrationContainer form {
+  width: 100%;
+  height: auto;
 }
-.addformPage .addformcontainer .RegitrationContainer form #subjects{
-    margin-top: 30px;
+.addformPage .addformcontainer .RegitrationContainer form #subjects {
+  margin-top: 30px;
 }
 .addformPage .addformcontainer .RegitrationContainer form .numbeript {
-    display: block;
-    height: 40px;
-    width: 50%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 25%;
-    border: 1px solid grey;
-    padding-left: 10px;
-    border-radius: 10px;
-    color: #053872;
-    background-color: transparent;
+  display: block;
+  height: 40px;
+  width: 50%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 25%;
+  border: 1px solid grey;
+  padding-left: 10px;
+  border-radius: 10px;
+  color: #053872;
+  background-color: transparent;
 }
-.addformPage .addformcontainer .RegitrationContainer form select{
-    display: block;
-    height: 40px;
-    width: 51%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 25%;
-    border: 1px solid grey;
-    padding-left: 10px;
-    border-radius: 10px;
-    color: #053872;
+.addformPage .addformcontainer .RegitrationContainer form select {
+  display: block;
+  height: 40px;
+  width: 51%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 25%;
+  border: 1px solid grey;
+  padding-left: 10px;
+  border-radius: 10px;
+  color: #053872;
 }
-.addformPage.dark-mode .addformcontainer .RegitrationContainer form select{
-background-color: #212121;
+.addformPage.dark-mode .addformcontainer .RegitrationContainer form select {
+  background-color: #212121;
 }
 .addformPage .addformcontainer .RegitrationContainer form .subjectDiv {
-    height: 40px;
-    width: 90%;
-    margin-left: 5%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 15px;
+  height: 40px;
+  width: 90%;
+  margin-left: 5%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 15px;
 }
 
 .addformPage .addformcontainer .RegitrationContainer form .subjectDiv input {
-    height: 100%;
-    width: 45%;
-    border: 1px solid grey;
-    border-radius: 10px;
-    padding-left: 10px;
-    color: #053872;
-    background-color: transparent;
+  height: 100%;
+  width: 45%;
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding-left: 10px;
+  color: #053872;
+  background-color: transparent;
 }
 
-.addformPage .addformcontainer .RegitrationContainer form .numbeript::placeholder,
-.addformPage .addformcontainer .RegitrationContainer form .subjectDiv input::placeholder {
-    color: #053872;
+.addformPage
+  .addformcontainer
+  .RegitrationContainer
+  form
+  .numbeript::placeholder,
+.addformPage
+  .addformcontainer
+  .RegitrationContainer
+  form
+  .subjectDiv
+  input::placeholder {
+  color: #053872;
 }
 
 .addformPage .addformcontainer .RegitrationContainer form .submit-btn {
-    color: white;
-    font-weight: 700;
-    position: relative;
-    height: 50px;
-    width: 20%;
-    left: 40%;
-    margin-top: 3%;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    border-color: #053872;
-    background-color: #053872;
-    font-size: 20px;
-    cursor: pointer;
+  color: white;
+  font-weight: 700;
+  position: relative;
+  height: 50px;
+  width: 20%;
+  left: 40%;
+  margin-top: 3%;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border-color: #053872;
+  background-color: #053872;
+  font-size: 20px;
+  cursor: pointer;
 }

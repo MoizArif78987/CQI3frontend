@@ -257,6 +257,7 @@ export default function Addform() {
         }
 
         const responseData = await response.json();
+        history.push(`/forms`);
         console.log(responseData);
       } catch (error) {
         console.error("Error:", error);

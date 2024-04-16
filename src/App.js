@@ -14,6 +14,8 @@ import Subjectform from './components/subjectform';
 import SendReminder from './components/sendreminder';
 import Result from './components/results';
 import ResultSubjectRegistration from './components/resultSubjectRegistration';
+import Editform from './components/editform';
+import Formsubmitted from './components/formsubmitted';
 
 // CustomRoute component to handle both cases of the form route
 const CustomRoute = ({ path, component: Component, exact }) => (
@@ -49,6 +51,8 @@ function App() {
           <Route exact path='/sendreminder' component={SendReminder} />
           <Route exact path='/results' component={Result} />
           <Route exact path='/subjectresults' component={ResultSubjectRegistration}/>
+          <Route exact path='/editform/:id' component={Editform}/>
+          <Route exact path='/formsubmitted' component={Formsubmitted}/>
 
           {/* Use CustomRoute for the form route */}
           <CustomRoute exact path='/form/:id' component={Form} />

@@ -1,0 +1,55 @@
+.EditFormPage{
+    height: 100vh;
+    width: 100vw;
+    transition: ease-in-out 0.3s;
+}
+.EditFormPage.dark-mode{
+    background-color: #212121;
+    color:white;
+    transition: ease-in-out 0.3s;
+}
+.EditFormPage .header{
+    text-align: center;
+}
+.EditFormPage .FormContainer{
+    height: 60%;
+    width: 80%;
+    border: 2px solid white;
+    background-color: transparent;
+    box-shadow: -5px 5px 10px 5px rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    margin-left: 10%;
+    overflow-y: scroll;
+    padding-left: 20px;
+}
+.EditFormPage .FormContainer .FormQuestions .QuestionContainer input{
+    height: 40px;
+    width: 80%;
+    margin-top: 3px;
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.EditFormPage.dark-mode .FormContainer .FormQuestions .QuestionContainer input{
+    color: white;
+    border: 1px solid white;
+}
+.EditFormPage .save-btn{
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.EditFormPage .save-btn button{
+    height: 100%;
+    width: 30%;
+    border: transparent;
+    border-radius: 30px;
+    background-color:  rgb(2, 182, 2);
+    color: white;
+}
