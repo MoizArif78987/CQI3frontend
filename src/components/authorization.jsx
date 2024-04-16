@@ -25,7 +25,7 @@ export default function Authorization() {
           credentials: 'include',
         });
 
-        if (response.ok) {
+        if (response.ok  || response.status === 204) {
           // Authentication successful, redirect to Adminpanel
           const data = await response.json();
           setAdminName(data.user_name);
