@@ -31,7 +31,7 @@ const Topnav = () => {
   };
 
   const handleDarkModeToggle = () => {
-    setDarkmode(!darkmode); // Toggle dark mode value
+    setDarkmode(!darkmode); 
   };
 
   return (
