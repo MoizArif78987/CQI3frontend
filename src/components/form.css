@@ -174,9 +174,10 @@
 }
 @media only screen and (max-width:700px){
     .FormPage .header h1{
-    font-size:15px;
+    font-size:20px;
 }
 .FormPage .FormContainer .submit-btn{
-    width:50%;
+    width:60%;
+    left: 20%;
 }
 }
