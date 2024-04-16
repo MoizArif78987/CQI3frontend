@@ -54,7 +54,7 @@ export default function Authorization() {
         },
         body: JSON.stringify(formData),
       });
-
+      console.log(formData);
       if (!response.ok) {
         throw new Error("Authentication failed");
       }
