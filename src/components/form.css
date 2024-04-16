@@ -172,3 +172,11 @@
     color:#053872;
     border-color: #c4c4f5;
 }
+@media only screen and (max-width:700px){
+    .FormPage .header h1{
+    font-size:15px;
+}
+.FormPage .FormContainer .submit-btn{
+    width:50%;
+}
+}
